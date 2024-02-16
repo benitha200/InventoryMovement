@@ -44,16 +44,9 @@ const App = () => {
       <div className="bg-gray-200 w-6/12 md:w-1/4 px-4 py-6">
         <h2 className="text-lg font-semibold mb-4">Forms</h2>
         <ul>
+          {/* Stock Forms */}
           <li className="mb-2">
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "login" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("login")}
-            >
-              Login
-            </button>
-          </li>
-          <li className="mb-2">
+            <h3 className="text-sm font-semibold mb-2">Stock</h3>
             <button
               className={`w-full text-left py-2 px-4 rounded ${activeForm === "stockInput" ? "bg-blue-500 text-white" : ""
                 }`}
@@ -80,7 +73,10 @@ const App = () => {
               Section Form
             </button>
           </li>
+
+          {/* Warehouse Forms */}
           <li className="mb-2">
+            <h3 className="text-sm font-semibold mb-2">Warehouse</h3>
             <button
               className={`w-full text-left py-2 px-4 rounded ${activeForm === "warehouseForm" ? "bg-blue-500 text-white" : ""
                 }`}
