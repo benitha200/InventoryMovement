@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import StockInputForm from "./components/StockInputForm";
-import StockOutForm from "./components/StockOutForm";
+import StockInPage from "./components/StockInPage";
+import StockOutPage from "./components/StockOutPage";
 import SectionForm from "./components/SectionForm";
 import WarehouseForm from "./components/WarehouseForm";
 import LoginPage from "./components/LoginPage";
@@ -22,9 +22,9 @@ const App = () => {
       case "login":
         return <LoginPage onLogin={handleLogin} />;
       case "stockInput":
-        return <StockInputForm />;
+        return <StockInPage />;
       case "stockOut":
-        return <StockOutForm />;
+        return <StockOutPage />;
       case "sectionForm":
         return <SectionForm />;
       case "warehouseForm":

@@ -1,6 +1,6 @@
 import React from "react";
 
-const StockOutForm = () => {
+const StockInForm = () => {
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="card">
@@ -87,4 +87,4 @@ const StockOutForm = () => {
     );
 };
 
-export default StockOutForm;
+export default StockInForm;
