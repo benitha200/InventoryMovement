@@ -1,116 +1,80 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
 import StockInPage from "./components/StockInPage";
 import StockOutPage from "./components/StockOutPage";
 import SectionForm from "./components/SectionForm";
 import WarehouseForm from "./components/WarehouseForm";
-import LoginPage from "./components/LoginPage";
 import WarehouseLayout from "./components/WarehouseLayout";
 import CurrentStock from "./components/CurrentStock";
 
 const App = () => {
-  const [activeForm, setActiveForm] = useState("login");
+  return (
+    <Router>
+      <div className="flex flex-col md:flex-row h-screen">
+        {/* Sidebar */}
+        <div className="bg-gray-200 w-6/12 md:w-1/4 px-4 py-6">
+          <ul>
+            {/* Stock Forms */}
+            <li className="mb-2">
+              <h3 className="text-lg font-bold mb-2">Stock</h3>
+              <LinkButton to="/stockInput" text="Stock Input" />
+            </li>
+            <li className="mb-2">
+              <LinkButton to="/stockOut" text="Stock Out" />
+            </li>
 
-  const handleLogin = (username, password) => {
-    // Your login logic goes here
-    console.log("Logged in with username:", username, "and password:", password);
-    // For demonstration, let's assume login is successful and switch to the stockInput form
-    setActiveForm("stockInput");
-  };
+            {/* Warehouse Forms */}
+            <li className="mb-2">
+              <h3 className="text-lg font-semibold mb-2">Warehouse</h3>
+              <LinkButton
+                to="/warehouseForm"
+                text="Create Warehouse Form"
+              />
+            </li>
+            <li className="mb-2">
+              <LinkButton to="/sectionForm" text="Create Section Form" />
+            </li>
+            <li className="mb-2">
+              <LinkButton
+                to="/warehouseLayout"
+                text="Warehouse Layout"
+              />
+            </li>
+            <li className="mb-2">
+              <LinkButton to="/currentStock" text="Current Stock" />
+            </li>
+          </ul>
+        </div>
 
-  const renderForm = () => {
-    switch (activeForm) {
-      case "login":
-        return <LoginPage onLogin={handleLogin} />;
-      case "stockInput":
-        return <StockInPage />;
-      case "stockOut":
-        return <StockOutPage />;
-      case "sectionForm":
-        return <SectionForm />;
-      case "warehouseForm":
-        return <WarehouseForm />;
-      case "warehouseLayout":
-        return <WarehouseLayout />;
-      case "currentStock":
-        return <CurrentStock />;
-      default:
-        return null;
-    }
-  };
+        {/* Main content area */}
+        <div className="flex-1 p-8 overflow-auto">
+          <Routes>
+            <Route exact path="/" element={<SectionForm />} />
+            <Route path="/stockInput" element={<StockInPage />} />
+            <Route path="/stockOut" element={<StockOutPage />} />
+            <Route path="/sectionForm" element={<SectionForm />} />
+            <Route path="/warehouseForm" element={<WarehouseForm />} />
+            <Route path="/warehouseLayout" element={<WarehouseLayout />} />
+            <Route path="/currentStock" element={<CurrentStock />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+};
+
+const LinkButton = ({ to, text }) => {
+  const location = useLocation();
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      {/* Sidebar */}
-      <div className="bg-gray-200 w-6/12 md:w-1/4 px-4 py-6">
-        <h2 className="text-lg font-semibold mb-4">Forms</h2>
-        <ul>
-          {/* Stock Forms */}
-          <li className="mb-2">
-            <h3 className="text-sm font-semibold mb-2">Stock</h3>
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "stockInput" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("stockInput")}
-            >
-              Stock Input
-            </button>
-          </li>
-          <li className="mb-2">
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "stockOut" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("stockOut")}
-            >
-              Stock Out
-            </button>
-          </li>
-          <li className="mb-2">
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "sectionForm" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("sectionForm")}
-            >
-              Section Form
-            </button>
-          </li>
-
-          {/* Warehouse Forms */}
-          <li className="mb-2">
-            <h3 className="text-sm font-semibold mb-2">Warehouse</h3>
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "warehouseForm" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("warehouseForm")}
-            >
-              Warehouse Form
-            </button>
-          </li>
-          <li className="mb-2">
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "warehouseLayout" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("warehouseLayout")}
-            >
-              Warehouse Layout
-            </button>
-          </li>
-          <li className="mb-2">
-            <button
-              className={`w-full text-left py-2 px-4 rounded ${activeForm === "currentStock" ? "bg-blue-500 text-white" : ""
-                }`}
-              onClick={() => setActiveForm("currentStock")}
-            >
-              Current Stock
-            </button>
-          </li>
-        </ul>
-      </div>
-
-      {/* Main content area */}
-      <div className="flex-1 p-8 overflow-auto">
-        {renderForm()}
-      </div>
-    </div>
+    <Link
+      to={to}
+      className={`w-full text-left py-2 px-4 rounded ${
+        location.pathname === to ? "bg-blue-500 text-white" : ""
+      }`}
+    >
+      {text}
+    </Link>
   );
 };
 

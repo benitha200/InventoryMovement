@@ -15,22 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from stock.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('/',include("api.urls")),
-    path('warehouse/', WarehouseListView.as_view(),name="warehouse"),
-    path('warehouse/create/', WareHouseCreateView.as_view(),name="warehouse-create"),
+    path('warehouse/', WarehouseListView.as_view(), name="warehouse"),
+    path('warehouse-create/', WareHouseCreateView.as_view(),
+         name="warehouse-create"),
 
-    path('section/create/', SectionCreateView.as_view(),name= "section-create"),
-    path('section/', SectionListView.as_view(),name="section"),
+    path('section/create/', SectionCreateView.as_view(), name="section-create"),
+    path('section/', SectionListView.as_view(), name="section"),
 
-    path('cell/create/', CellCreateView.as_view(),name= "cell-create"),
-    path('cell/', CellListView.as_view(),name= "cell"),
+    path('cell/create/', CellCreateView.as_view(), name="cell-create"),
+    path('cell/', CellListView.as_view(), name="cell"),
 
-    path('supplier/create/', SectionCreateView.as_view(), name= "supplier-create"),
+    path('supplier/create/', SectionCreateView.as_view(), name="supplier-create"),
     path('supplier/', SupplierListView.as_view(), name="supplier")
 
 ]
